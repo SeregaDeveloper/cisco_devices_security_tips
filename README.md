@@ -8,7 +8,6 @@
 > enable secret <password>
 > end
 > wr mem
-
 ```
 
 ### Создание администратора
@@ -20,7 +19,6 @@
 > username <admin> secret <password>
 > end
 > wr mem
-
 ```
 
 ### Настройка виртуального терминала
@@ -32,7 +30,6 @@
 > privellege level 15
 > end
 > wr mem
-
 ```
 
 ### Настройка подключения по SSH
@@ -47,5 +44,4 @@
 > [Enter]
 > end
 > wr mem
-
 ```
