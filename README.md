@@ -82,3 +82,19 @@
 > end
 > wr mem
 ```
+
+### 1.7 Защита от подключений к неиспользуемым портам
+
+```
+> en 
+> conf t
+> int range f0/1-24 
+> vlan 999
+> name Unconnected
+> exit
+> int range f0/1-24
+> switchport mode access vlan 999
+> shutdown
+> end
+> wr mem
+```
