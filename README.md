@@ -19,7 +19,7 @@
 ```
 > en 
 > conf t
-> enable secret <password>
+> enable secret password
 > end
 > wr mem
 ```
@@ -30,7 +30,7 @@
 > en 
 > conf t
 > aaa new-model
-> username <admin> secret <password>
+> username admin secret password
 > end
 > wr mem
 ```
@@ -110,8 +110,8 @@
 ```
 > en 
 > conf t
-> int <f0/1>
-> switchport port-security mac-address <xx:xx:xx:xx:xx:xx>
+> int f0/1
+> switchport port-security mac-address xx:xx:xx:xx:xx:xx
 > end
 > wr mem
 ```
@@ -124,7 +124,7 @@
 > int f0/1
 > switchport port-security mac-address sticky
 > switchport port-security maximum 3
-> arp timeout <60>
+> arp timeout 60
 > end
 > wr mem
 ```
