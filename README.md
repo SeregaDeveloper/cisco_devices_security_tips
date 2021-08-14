@@ -12,6 +12,7 @@
    2. [Настройка защиты от компьютерных атак](#2-Настройка-защиты-от-компьютерных-атак)
       - 2.1 [Защита от атаки на протокол STP](#21-Защита-от-атаки-на-протокол-STP)
       - 2.2 [Защита от подмены MAC-адреса (MAC Spoofing)](#22-защита-от-подмены-mac-адреса-mac-spoofing)
+      - 2.3 [Защита от атаки на DHCP](#22-защита-от-атаки-на-DHCP)
 
 ## 1. Настройка защиты от несанкционированного доступа
 
@@ -130,3 +131,30 @@
 > wr mem
 ```
 
+### 2.3 Защита от атаки на DHCP
+
+- Включение DHCP Snooping
+
+```
+> en 
+> conf t
+> ip dhcp snooping
+> ip dhcp snooping vlan 10
+> int f0/1
+> ip dhcp snooping trust
+> end
+> wr mem
+```
+
+- Ограничение DHCP-запросов в сети 
+
+```
+> en 
+> conf t
+> ip dhcp snooping 
+> ip dhcp snooping vlan 10
+> int f0/1
+> ip dhcp snooping limit rate 50
+> end
+> wr mem
+```
