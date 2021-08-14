@@ -8,7 +8,7 @@
       - 1.3 [Настройка виртуального терминала для удаленного администрирования](#13-настройка-виртуального-терминала-для-удаленного-администрирования)
       - 1.4 [Настройка подключения по SSH](#14-Настройка-подключения-по-SSH)
       - 1.5 [Разрешение подключения только по SSH](#15-Разрешение-подключения-только-по-SSH)
-      - 1.6 [Ограничение подключений к портам](#16-Ограничение-подключений-к-портам) 
+      - 1.6 [Защита от подключений к неиспользуемым портам](#16-Защита-от-подключений-к-неиспользуемым-портам) 
    2. [Настройка защиты от компьютерных атак](#2-Настройка-защиты-от-компьютерных-атак)
       - 2.1 [Защита от атаки на протокол STP](#21-Защита-от-атаки-на-протокол-STP)
 
@@ -51,8 +51,8 @@
 ```
 > en 
 > conf t
-> hostname <sw_example_name>
-> ip domain-name <test.org
+> hostname sw_example_name
+> ip domain-name test.org
 > crypto key generate rsa
 > 1024
 > [Enter]
@@ -71,21 +71,7 @@
 > wr mem
 ```
 
-### 1.6 Ограничение подключений к портам
-
-```
-> en 
-> conf t
-> int range f0/1-24 
-> switchport mode access
-> switchport port-security violation shutdown 
-> switchport port-security maximum <3>
-> switchport port-security mac-address sticky
-> end
-> wr mem
-```
-
-### 1.7 Защита от подключений к неиспользуемым портам
+### 1.6 Защита от подключений к неиспользуемым портам
 
 ```
 > en 
@@ -111,8 +97,34 @@
 > int range f0/1-24 
 > spanning-tree portfast
 > spanning-tree portfast bpguard default
-> int f0/1 
+> int f0/1
 > spanning-tree guard root
+> end
+> wr mem
+```
+
+### 2.2 Защита от подмены MAC-адреса (MAC Spoofing)
+
+### Метод жесткой привязки по MAC
+
+```
+> en 
+> conf t
+> int <f0/1>
+> switchport port-security mac-address <xx:xx:xx:xx:xx:xx>
+> end
+> wr mem
+```
+
+### Метод c привязкой нескольких MAC-адресов
+
+```
+> en 
+> conf t
+> int f0/1
+> switchport port-security mac-address sticky
+> switchport port-security maximum 3
+> arp timeout <60>
 > end
 > wr mem
 ```
